@@ -5,7 +5,7 @@ FROM php:8.2-apache
 WORKDIR /var/www/html
 
 # Copier index.php et le mettre à la racine qui est maintenant /var/www/html
-COPY . .
+COPY ./src .
 
 # Exposer le port 8081 explicitement
 EXPOSE 8080
