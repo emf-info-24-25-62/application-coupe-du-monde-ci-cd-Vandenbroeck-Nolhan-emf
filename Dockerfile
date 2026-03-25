@@ -13,3 +13,5 @@ EXPOSE 8080
 # Donner les permissions à www-data:www-data d'executer tous les fichiers de /var/www/html car apache utilise cet utilisateur et pas un autre.
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
+
+LABEL VERSION "version 2.0-countries"
