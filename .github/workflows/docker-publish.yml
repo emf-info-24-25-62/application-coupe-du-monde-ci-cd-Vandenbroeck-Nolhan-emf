@@ -23,6 +23,11 @@ jobs:
           registry: ghcr.io  # Utilise GitHub Container Registry
           username: ${{ github.actor }}  # Utilise l'utilisateur courant
           password: ${{ secrets.GITHUB_TOKEN }}  # Utilise le token GitHub
+
+      # Mettre le nom du repository en full lower case
+      - name: Set lowercase repository name
+        id: repo
+        run: echo "repo=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
           
       # Construction et publication de l'image Docker
       - name: Build and push
@@ -30,4 +35,4 @@ jobs:
         with:
           context: .  # Contexte de build (répertoire courant)
           push: true  # Active la publication de l'image
-          tags: ghcr.io/${{ github.repository }}:latest  # Tag de l'image
+          tags: ghcr.io/${{ steps.repo.outputs.repo }}:latest  # Tag de l'image ( utiliser le résultat du steps qui a l'id repo)
